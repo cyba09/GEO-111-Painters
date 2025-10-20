@@ -645,7 +645,7 @@
                   <p>Get started with your next construction project today</p>
                 </div>
 
-                <form action="forms/get-a-quote.php" method="post" class="php-email-form">
+                <form  method="post" class="php-email-form">
                   <div class="row g-3">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -772,13 +772,52 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+document.querySelector('.php-email-form').addEventListener('submit', function (e) {
+  e.preventDefault(); // prevent normal submit
+
+  // Get form values
+  const name = document.querySelector('[name="name"]').value.trim();
+  const email = document.querySelector('[name="email"]').value.trim();
+  const phone = document.querySelector('[name="phone"]').value.trim();
+  const type = document.querySelector('[name="type"]').value.trim();
+  const message = document.querySelector('[name="message"]').value.trim();
+
+  // Format WhatsApp message
+  const whatsappMessage = `
+📋 *New Quote Request*
+-------------------------
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+📞 *Phone:* ${phone}
+🏗️ *Project Type:* ${type}
+💬 *Project Details:*
+${message}
+-------------------------
+Sent from the website form.
+  `.trim();
+
+  // Encode for URL
+  const encodedMessage = encodeURIComponent(whatsappMessage);
+
+  // Your WhatsApp number
+  const whatsappNumber = "27670127989";
+
+  // Final link
+  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+  // Open WhatsApp chat
+  window.open(whatsappLink, '_blank');
+});
+</script>
+
 
 </body>
 
